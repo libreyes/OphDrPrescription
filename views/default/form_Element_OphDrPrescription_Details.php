@@ -108,6 +108,7 @@
 		</div>
 	</div>
 	<?php echo $form->textArea($element, 'comments', array('rows' => 4, 'cols' => 60)) ?>
+    <?php echo $form->dropDownList($element, 'prescriber', CHtml::listData(OphDrPrescription_Prescribers::model()->findAll(array('order'=> 'name asc')),'id','name'),array('empty'=>'- Please select -'))?>
 </div>
 
 <script type="text/javascript">

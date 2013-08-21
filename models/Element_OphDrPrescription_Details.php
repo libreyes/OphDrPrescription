@@ -54,11 +54,11 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('event_id, comments, draft, print', 'safe'),
+				array('event_id, comments, draft, print, prescriber', 'safe'),
 				//array('', 'required'),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
-				array('id, event_id, comments', 'safe', 'on' => 'search'),
+				array('id, event_id, comments, prescriber', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -76,6 +76,8 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 				'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 				'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 				'items' => array(self::HAS_MANY, 'OphDrPrescription_Item', 'prescription_id'),
+                'prescriber' => array(self::BELONGS_TO, 'OphDrPrescription_Prescribers', 'presciber'),
+
 		);
 	}
 
@@ -84,7 +86,9 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 	 */
 	public function attributeLabels()
 	{
-		return array();
+        return array(
+            'prescriber' => 'Completed by',
+        );
 	}
 
 	/**
