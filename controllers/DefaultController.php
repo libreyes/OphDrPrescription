@@ -381,8 +381,12 @@ class DefaultController extends BaseEventTypeController
 				$params = array(':subspecialty_id' => $subspecialty_id, ':status_name' => $status_name);
 				$set = DrugSet::model()->find(array(
 						'condition' => 'subspecialty_id = :subspecialty_id AND name = :status_name',
-						'params' => $params,
-				));
+						'params' => $params,));
+                if(!$set) {
+                    $set = DrugSet::model()->find(array(
+                        'condition' => 'subspecialty_id is NULL AND name is NULL'
+                    ));
+                }
 				if ($set) {
 					foreach ($set->items as $item) {
 						$item_model = new OphDrPrescription_Item();
