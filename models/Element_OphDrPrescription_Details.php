@@ -55,7 +55,7 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 		// will receive user inputs.
 		return array(
 				array('event_id, comments, draft, print, prescriber', 'safe'),
-				//array('', 'required'),
+				array('prescriber', 'required'),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
 				array('id, event_id, comments, prescriber', 'safe', 'on' => 'search'),

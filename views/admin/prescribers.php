@@ -31,7 +31,7 @@
                         <?php foreach (OphDrPrescription_Prescribers::model()->findAll(array('order'=>'name asc')) as $i => $nurse) {?>
                             <li class="<?php if ($i%2 == 0) {?>even<?php } else {?>odd<?php }?>" data-attr-id="<?php echo $nurse->id?>">
                                 <span class="column_checkbox"><input type="checkbox" name="prescriber[]" value="<?php echo $nurse->id?>" class="wards" /></span>
-                                <span class="column_code"><?php echo $nurse->name?></span>
+                                <span class="column_name"><?php echo $nurse->name?></span>
                             </li>
                         <?php }?>
                     </div>
