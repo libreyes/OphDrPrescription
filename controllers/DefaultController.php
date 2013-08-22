@@ -388,11 +388,15 @@ class DefaultController extends BaseEventTypeController
                     ));
                 }
 				if ($set) {
+                    //use defaults from drug_set_item if they exist or default to drug defaults
 					foreach ($set->items as $item) {
 						$item_model = new OphDrPrescription_Item();
 						$item_model->drug_id = $item->drug_id;
-						$item_model->loadDefaults();
-						$items[] = $item_model;
+                        $item_model->loadDefaults();
+                        if($item->duration_id) $item_model->duration_id = $item->duration_id;
+                        if($item->frequency_id) $item_model->frequency_id = $item->frequency_id;
+                        if($item->dose) $item_model->dose = $item->dose;
+                        $items[] = $item_model;
 					}
 				}
 			}
