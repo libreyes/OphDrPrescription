@@ -19,34 +19,34 @@
 
 ?>
 <div class="report curvybox white">
-    <div class="admin">
-        <h3 class="georgia"><?php echo $nurse->id ? 'Edit' : 'Add'?> Prescriber</h3>
-        <?php echo $this->renderPartial('_form_errors',array('errors'=>$errors))?>
-        <div>
-            <?php
-            $form = $this->beginWidget('BaseEventTypeCActiveForm', array(
-                'id'=>'adminform',
-                'enableAjaxValidation'=>false,
-                'htmlOptions' => array('class'=>'sliding'),
-                'focus'=>'#username'
-            ))?>
-            <?php echo $form->textField($nurse,'name')?>
-            <?php $this->endWidget()?>
-        </div>
-    </div>
+	<div class="admin">
+		<h3 class="georgia"><?php echo $nurse->id ? 'Edit' : 'Add'?> Prescriber</h3>
+		<?php echo $this->renderPartial('_form_errors',array('errors'=>$errors))?>
+		<div>
+			<?php
+			$form = $this->beginWidget('BaseEventTypeCActiveForm', array(
+				'id'=>'adminform',
+				'enableAjaxValidation'=>false,
+				'htmlOptions' => array('class'=>'sliding'),
+				'focus'=>'#username'
+			))?>
+			<?php echo $form->textField($nurse,'name')?>
+			<?php $this->endWidget()?>
+		</div>
+	</div>
 </div>
 <?php echo $this->renderPartial('_form_errors',array('errors'=>$errors))?>
 <div>
-    <?php echo EventAction::button('Save', 'save', array('colour' => 'green'))->toHtml()?>
-    <?php echo EventAction::button('Cancel', 'cancel', array('colour' => 'red'))->toHtml()?>
-    <img class="loader" src="<?php echo Yii::app()->createUrl('/img/ajax-loader.gif')?>" alt="loading..." style="display: none;" />
+	<?php echo EventAction::button('Save', 'save', array('colour' => 'green'))->toHtml()?>
+	<?php echo EventAction::button('Cancel', 'cancel', array('colour' => 'red'))->toHtml()?>
+	<img class="loader" src="<?php echo Yii::app()->createUrl('/img/ajax-loader.gif')?>" alt="loading..." style="display: none;" />
 </div>
 <script type="text/javascript">
-    handleButton($('#et_cancel'),function(e) {
-        e.preventDefault();
-        window.location.href = baseUrl+'/OphDrPrescription/admin/viewprescribers';
-    });
-    handleButton($('#et_save'),function(e) {
-        $('#adminform').submit();
-    });
+	handleButton($('#et_cancel'),function(e) {
+		e.preventDefault();
+		window.location.href = baseUrl+'/OphDrPrescription/admin/viewprescribers';
+	});
+	handleButton($('#et_save'),function(e) {
+		$('#adminform').submit();
+	});
 </script>

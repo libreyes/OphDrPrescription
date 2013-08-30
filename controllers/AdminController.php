@@ -19,79 +19,79 @@
 
 class AdminController extends ModuleAdminController
 {
-    public function actionViewPrescribers()
-    {
-        $this->render('/admin/prescribers',array(
+	public function actionViewPrescribers()
+	{
+		$this->render('/admin/prescribers',array(
 
-        ));
-    }
+		));
+	}
 
-    public function actionDeletePrescribers()
-    {
+	public function actionDeletePrescribers()
+	{
 
-        $criteria = new CDbCriteria;
-        $criteria->addInCondition('id',@$_POST['prescriber']);
-        if (OphDrPrescription_Prescribers::model()->deleteAll($criteria)) {
-            echo "1";
-            Audit::add('admin-Prescriber','delete',serialize($_POST));
-        } else {
-            echo "0";
-        }
-    }
+		$criteria = new CDbCriteria;
+		$criteria->addInCondition('id',@$_POST['prescriber']);
+		if (OphDrPrescription_Prescribers::model()->deleteAll($criteria)) {
+			echo "1";
+			Audit::add('admin-Prescriber','delete',serialize($_POST));
+		} else {
+			echo "0";
+		}
+	}
 
-    public function actionVerifyDeletePrescribers()
-    {
+	public function actionVerifyDeletePrescribers()
+	{
 
-        foreach (OphDrPrescription_Prescribers::model()->findAllByPk(@$_POST['id']) as $cb) {
-            if (!$cb->canDelete()) {
-                echo "0";
-                return;
-            }
-        }
+		foreach (OphDrPrescription_Prescribers::model()->findAllByPk(@$_POST['id']) as $cb) {
+			if (!$cb->canDelete()) {
+				echo "0";
+				return;
+			}
+		}
 
-        echo "1";
-    }
+		echo "1";
+	}
 
-    public function actionEditPrescriber()
-    {
-        $this->actionAddPrescriber();
-    }
+	public function actionEditPrescriber()
+	{
+		$this->actionAddPrescriber();
+	}
 
-    public function actionAddPrescriber()
-    {
+	public function actionAddPrescriber()
+	{
 
-        if (isset($_GET['id'])) {
-            if (!$nurse = OphDrPrescription_Prescribers::model()->findByPk(@$_GET['id']))
-            {
-                throw new Exception("OphDrPrescription_Prescribers not found: ".@$_GET['id']);
-            }
-        }
-        else
-            $nurse = new OphDrPrescription_Prescribers;
+		if (isset($_GET['id'])) {
+			if (!$nurse = OphDrPrescription_Prescribers::model()->findByPk(@$_GET['id']))
+			{
+				throw new Exception("OphDrPrescription_Prescribers not found: ".@$_GET['id']);
+			}
+		}
+		else
+			$nurse = new OphDrPrescription_Prescribers;
 
 
-        $errors = array();
+		$errors = array();
 
-        if (!empty($_POST)) {
+		if (!empty($_POST)) {
 
-            $nurse->name = $_POST['OphDrPrescription_Prescribers']['name'];
+			$nurse->name = $_POST['OphDrPrescription_Prescribers']['name'];
 
-            if (!$nurse->validate())
-                $errors = $nurse->getErrors();
+			if (!$nurse->validate())
+				$errors = $nurse->getErrors();
 
-            if (empty($errors)) {
+			if (empty($errors)) {
 
-                if (!$nurse->save()) {
-                    throw new Exception("Unable to save prescriber");
-                }
-            }
-            $this->redirect('viewprescribers/');
-        }
+				if (!$nurse->save()) {
+					throw new Exception("Unable to save prescriber");
+				}
+			}
+			$this->redirect('viewprescribers/');
+		}
 
-        $this->render('/admin/editprescribers',array(
-            'nurse' => $nurse,
-            'errors' => $errors,
-        ));
-    }
+		$this->render('/admin/editprescribers',array(
+			'nurse' => $nurse,
+			'errors' => $errors,
+		));
+	}
 
 }

@@ -18,9 +18,9 @@
  */
 
 return array(
-    'params' => array(
-        'admin_menu' => array(
-            'Prescribers' => '/OphDrPrescription/Admin/ViewPrescribers/',
-        ),
-    ),
+	'params' => array(
+		'admin_menu' => array(
+			'Prescribers' => '/OphDrPrescription/Admin/ViewPrescribers/',
+		),
+	),
 );

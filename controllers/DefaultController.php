@@ -382,21 +382,21 @@ class DefaultController extends BaseEventTypeController
 				$set = DrugSet::model()->find(array(
 						'condition' => 'subspecialty_id = :subspecialty_id AND name = :status_name',
 						'params' => $params,));
-                if(!$set) {
-                    $set = DrugSet::model()->find(array(
-                        'condition' => 'subspecialty_id is NULL AND name is NULL'
-                    ));
-                }
+				if(!$set) {
+					$set = DrugSet::model()->find(array(
+						'condition' => 'subspecialty_id is NULL AND name is NULL'
+					));
+				}
 				if ($set) {
-                    //use defaults from drug_set_item if they exist or default to drug defaults
+					//use defaults from drug_set_item if they exist or default to drug defaults
 					foreach ($set->items as $item) {
 						$item_model = new OphDrPrescription_Item();
 						$item_model->drug_id = $item->drug_id;
-                        $item_model->loadDefaults();
-                        if($item->duration_id) $item_model->duration_id = $item->duration_id;
-                        if($item->frequency_id) $item_model->frequency_id = $item->frequency_id;
-                        if($item->dose) $item_model->dose = $item->dose;
-                        $items[] = $item_model;
+						$item_model->loadDefaults();
+						if($item->duration_id) $item_model->duration_id = $item->duration_id;
+						if($item->frequency_id) $item_model->frequency_id = $item->frequency_id;
+						if($item->dose) $item_model->dose = $item->dose;
+						$items[] = $item_model;
 					}
 				}
 			}

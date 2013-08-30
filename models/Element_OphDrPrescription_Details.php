@@ -76,7 +76,7 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 				'user' => array(self::BELONGS_TO, 'User', 'created_user_id'),
 				'usermodified' => array(self::BELONGS_TO, 'User', 'last_modified_user_id'),
 				'items' => array(self::HAS_MANY, 'OphDrPrescription_Item', 'prescription_id'),
-                'prescriber' => array(self::BELONGS_TO, 'OphDrPrescription_Prescribers', 'presciber'),
+				'prescriber' => array(self::BELONGS_TO, 'OphDrPrescription_Prescribers', 'presciber'),
 
 		);
 	}
@@ -86,9 +86,9 @@ class Element_OphDrPrescription_Details extends BaseEventTypeElement
 	 */
 	public function attributeLabels()
 	{
-        return array(
-            'prescriber' => 'Completed by',
-        );
+		return array(
+			'prescriber' => 'Completed by',
+		);
 	}
 
 	/**
